@@ -11,24 +11,24 @@ module LinkedinCreative
       url = build_url(path)
       options = build_opts(opts)
       response = HTTParty.public_send(method, url, options)
-      result = {http_code: response.code, body: response.parsed_response}
-      result_klass = response.success? && response.parsed_response["code"].zero? ? Success : Error
-      result_klass.new(result)
+      response.parsed_response
     end
 
     private
 
     def build_opts(opts)
       opts[:headers] ||= {}
-      opts[:headers]["User-Agent"] = USER_AGENT
+      opts[:headers]["User-Agent"] = opts[:user_agent] unless opts[:headers]["User-Agent"]
       opts[:headers]["Content-Type"] = CONTENT_TYPE
       opts[:headers]["LinkedIn-Version"] = LINKEDIN_VERSION
       opts[:body] = opts[:body].to_json if opts[:body].is_a?(Hash)
+      opts[:query] = opts[:query] if opts[:query].is_a?(Hash)
       opts[:debug_output] = DEBUG_OUTPUT ? Rails.logger : nil
       opts
     end
 
     def build_url(path)
+      return path if path.include?("https://")
       "#{BASE_URL}/#{BASE_PATH}/#{path}"
     end
   end
