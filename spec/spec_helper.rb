@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "linkedin_creative"
+require "linkedin"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

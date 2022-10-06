@@ -1,14 +1,14 @@
-require_relative 'lib/linkedin_creative/version'
+require_relative 'lib/linkedin/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "linkedin_creative"
-  spec.version       = LinkedinCreative::VERSION
+  spec.name          = "linkedin"
+  spec.version       = Linkedin::VERSION
   spec.authors       = ["Growth Nirvana"]
   spec.email         = ["matias.code@growthnirvana.com"]
 
-  spec.summary       = "LinkedIn Creatives API for Business"
+  spec.summary       = "LinkedIn API for Business"
   spec.description   = "spec.summary"
-  spec.homepage      = "https://github.com/growth-nirvana/linkedin_creative"
+  spec.homepage      = "https://github.com/growth-nirvana/linkedin"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
 
   # spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"

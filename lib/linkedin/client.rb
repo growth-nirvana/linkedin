@@ -1,11 +1,11 @@
-module LinkedinCreative
+module Linkedin
   class Client
     BASE_PATH = "rest".freeze
-    BASE_URL = ENV.fetch("LINKEDIN_CREATIVE_BASE_URL", "https://api.linkedin.com").freeze
+    BASE_URL = ENV.fetch("LINKEDIN_BASE_URL", "https://api.linkedin.com").freeze
     CONTENT_TYPE = "application/json".freeze
     LINKEDIN_VERSION = ENV.fetch("LINKEDIN_VERSION", "202206")
-    DEBUG_OUTPUT = ENV.fetch("LINKEDIN_CREATIVE_DEBUG_OUTPUT", "false") == "true"
-    USER_AGENT = "Growth Nirvana Linkedin Creative Client".freeze
+    DEBUG_OUTPUT = ENV.fetch("LINKEDIN_DEBUG_OUTPUT", "false") == "true"
+    USER_AGENT = "Growth Nirvana Linkedin Client".freeze
 
     def call_api(method, path, opts = {})
       url = build_url(path)
@@ -23,7 +23,7 @@ module LinkedinCreative
       opts[:headers]["LinkedIn-Version"] = LINKEDIN_VERSION
       opts[:body] = opts[:body].to_json if opts[:body].is_a?(Hash)
       opts[:query] = opts[:query] if opts[:query].is_a?(Hash)
-      opts[:debug_output] = DEBUG_OUTPUT ? Rails.logger : nil
+      opts[:debug_output] = DEBUG_OUTPUT ? Logger.new($stdout) : nil
       opts
     end
 

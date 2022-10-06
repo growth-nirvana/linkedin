@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.describe LinkedinCreative::Authentication do
+RSpec.describe Linkedin::Authentication do
   describe "#access_token" do
     subject do
       described_class.new.access_token(

@@ -1,4 +1,4 @@
-module LinkedinCreative
+module Linkedin
   class Authentication
     def initialize(client = Client.new)
       @client = client
