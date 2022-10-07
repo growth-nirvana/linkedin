@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    linkedin (0.1.0)
+    linkedin (0.1.1)
       httparty (> 0.18.0, < 1.0)
 
 GEM

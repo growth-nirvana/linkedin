@@ -7,6 +7,10 @@ module Linkedin
     DEBUG_OUTPUT = ENV.fetch("LINKEDIN_DEBUG_OUTPUT", "false") == "true"
     USER_AGENT = "Growth Nirvana Linkedin Client".freeze
 
+    def initialize(access_token = nil)
+      @access_token = access_token
+    end
+
     def call_api(method, path, opts = {})
       url = build_url(path)
       options = build_opts(opts)
@@ -21,6 +25,8 @@ module Linkedin
       opts[:headers]["User-Agent"] = opts[:user_agent] unless opts[:headers]["User-Agent"]
       opts[:headers]["Content-Type"] = CONTENT_TYPE
       opts[:headers]["LinkedIn-Version"] = LINKEDIN_VERSION
+      opts[:headers]["X-Restli-Protocol-Version"] = "2.0.0"
+      opts[:headers]["Authorization"] = "Bearer #{@access_token}" if !@access_token.nil?
       opts[:body] = opts[:body].to_json if opts[:body].is_a?(Hash)
       opts[:query] = opts[:query] if opts[:query].is_a?(Hash)
       opts[:debug_output] = DEBUG_OUTPUT ? Logger.new($stdout) : nil
