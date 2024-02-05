@@ -27,5 +27,23 @@ module Linkedin
         }
       )
     end
+
+    def refresh_token(refresh_token:, client_id:, client_secret:)
+      @client.call_api(
+        :post,
+        "https://www.linkedin.com/oauth/v2/accessToken",
+        {
+          query: {
+            grant_type: "refresh_token",
+            refresh_token: refresh_token,
+            client_id: client_id,
+            client_secret: client_secret
+          },
+          headers: {
+            "User-Agent" => "x-www-form-urlencoded"
+          }
+        }
+      )
+    end
   end
 end
